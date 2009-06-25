@@ -16,11 +16,10 @@ Returns true if it is, false if not.
 sub is_leap_year {
     my $class = shift;
     my $year = shift;
-    
-    unless ($year % 4 && (!$year % 100 || $year % 400)) {
-        return 1;
-    }
-    
+
+    return 1 unless $year % 400;
+    return 0 unless $year % 100;
+    return 1 unless $year % 4;
     return 0;
 }
 
