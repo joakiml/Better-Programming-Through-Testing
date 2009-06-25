@@ -7,13 +7,16 @@ use Test::More; #"no_plan" or put a plan
 
 use_ok("MyDate");
 
-ok(!MyDate->is_leap_year(1989), "1989 is not a leap year");
+my %tests = (
+    1989    => 0,
+    1988    => 1,
+    2000    => 1,
+    1900    => 0,
+);
 
-ok(MyDate->is_leap_year(1988), "1988 is a leap year");
-
-ok(MyDate->is_leap_year(2000), "2000 is a leap year");
-
-ok(!MyDate->is_leap_year(1900), "1900 is not a leap year");
-
+for my $year (keys %tests) {
+    my $is_leap_year = MyDate->is_leap_year($year);
+    is (!!$is_leap_year, !!$tests{$year}, "is_leap_year($year)")
+}
 
 done_testing;
